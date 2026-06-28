@@ -1,10 +1,21 @@
-from core.banco import BancoExcel
+from pathlib import Path
+from openpyxl import Workbook
 
-def main():
+BASE = Path(__file__).parent
+EXCEL = BASE / "excel"
 
-    sistema = BancoExcel()
+EXCEL.mkdir(exist_ok=True)
 
-    sistema.criar()
+arquivo = EXCEL / "FINANCE_CONTROL_PRO.xlsx"
 
-if __name__ == "__main__":
-    main()
+wb = Workbook()
+
+ws = wb.active
+ws.title = "Dashboard"
+
+ws["A1"] = "FINANCE CONTROL PRO"
+ws["A3"] = "Sistema inicial criado com sucesso"
+
+wb.save(arquivo)
+
+print("Projeto criado:", arquivo)
